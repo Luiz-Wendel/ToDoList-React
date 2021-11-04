@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToastsContainer, ToastsContainerPosition, ToastsStore } from 'react-toasts';
+import { ToastsStore } from 'react-toasts';
 import axios from 'axios';
 import UserForm from '../../components/UserForm';
 import localStorageHelper from '../../helpers/localStorageHelper';
@@ -12,6 +12,8 @@ const handleSignIn = async ({ email, password }) => {
 
     localStorageHelper.set('token', response.data.token);
 
+    ToastsStore.success('Success!');
+
     // TODO: redirect to tasks page
   } catch (error) {
     ToastsStore.error(error.response.data.message);
@@ -20,11 +22,6 @@ const handleSignIn = async ({ email, password }) => {
 
 const SignIn = () => (
   <main>
-    <ToastsContainer
-      store={ToastsStore}
-      position={ToastsContainerPosition.TOP_CENTER}
-    />
-
     <h1 data-testid="signin-title">SignIn</h1>
 
     <UserForm handleSubmit={handleSignIn} />
