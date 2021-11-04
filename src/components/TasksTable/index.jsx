@@ -1,27 +1,16 @@
 import React from 'react';
-import axios from 'axios';
 import { ToastsStore } from 'react-toasts';
 import PropTypes from 'prop-types';
 import TaskRow from './TaskRow';
 import TableHead from './TableHead';
-
-const { REACT_APP_API_URL } = process.env;
+import axiosHelper from '../../helpers/axiosHelper';
 
 const TasksTable = ({ token, tasks, setTasks }) => {
   const getTasks = async () => {
-    const axiosConfig = {
-      headers: {
-        Authorization: token,
-      },
-    };
+    const response = await axiosHelper.getFromApi('/tasks', token);
 
-    try {
-      const { data } = await axios.get(`${REACT_APP_API_URL}/tasks`, axiosConfig);
-
-      setTasks(data.tasks);
-    } catch (error) {
-      ToastsStore.error(error.response.data.message);
-    }
+    if (response.data) setTasks(response.data.tasks);
+    else ToastsStore.error(response.response.data.message);
   };
 
   React.useEffect(() => {
@@ -36,7 +25,7 @@ const TasksTable = ({ token, tasks, setTasks }) => {
       <tbody>
         {
           tasks && tasks.map((task, index) => (
-            <TaskRow key={task.createdAt} number={index + 1} task={task} />
+            <TaskRow key={task.createdAt} number={index + 1} task={task} token={token} />
           ))
         }
       </tbody>
