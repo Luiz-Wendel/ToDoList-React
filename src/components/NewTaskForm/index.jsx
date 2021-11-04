@@ -7,12 +7,12 @@ import { useHistory } from 'react-router-dom';
 import axiosHelper from '../../helpers/axiosHelper';
 import localStorageHelper from '../../helpers/localStorageHelper';
 
-const NewTaskForm = ({ token, setTasks }) => {
+const NewTaskForm = ({ setTasks }) => {
   const history = useHistory();
   const [description, setDescription] = React.useState('');
 
   const handleNewTask = async () => {
-    const data = await axiosHelper.postToApi('/tasks', { description }, token);
+    const data = await axiosHelper.postToApi('/tasks', { description });
 
     if (data.code) {
       ToastsStore.error(data.message);
@@ -47,7 +47,6 @@ const NewTaskForm = ({ token, setTasks }) => {
 };
 
 NewTaskForm.propTypes = {
-  token: PropTypes.string,
   setTasks: PropTypes.func,
 }.isRequired;
 

@@ -11,7 +11,7 @@ const TasksTable = ({ token, tasks, setTasks }) => {
   const history = useHistory();
 
   const getTasks = async () => {
-    const data = await axiosHelper.getFromApi('/tasks', token);
+    const data = await axiosHelper.getFromApi('/tasks');
 
     if (data.tasks) setTasks(data.tasks);
     else {
@@ -36,7 +36,7 @@ const TasksTable = ({ token, tasks, setTasks }) => {
       <tbody>
         {
           tasks && tasks.map((task, index) => (
-            <TaskRow key={task.createdAt} number={index + 1} task={task} token={token} />
+            <TaskRow key={task.createdAt} number={index + 1} task={task} />
           ))
         }
       </tbody>

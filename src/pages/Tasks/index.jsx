@@ -39,7 +39,7 @@ const Tasks = () => {
 
       <h1>Tasks</h1>
 
-      <NewTaskForm token={token} setTasks={setTasks} />
+      <NewTaskForm setTasks={setTasks} />
 
       <TasksTable token={token} tasks={tasks} setTasks={setTasks} />
     </main>
