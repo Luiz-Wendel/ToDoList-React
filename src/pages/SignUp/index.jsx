@@ -1,24 +1,21 @@
 import React from 'react';
-import axios from 'axios';
 import { ToastsStore } from 'react-toasts';
 import { useHistory } from 'react-router-dom';
 import UserForm from '../../components/UserForm';
 import Header from '../../components/Header';
-
-const { REACT_APP_API_URL } = process.env;
+import axiosHelper from '../../helpers/axiosHelper';
 
 const SignUp = () => {
   const history = useHistory();
 
   const handleSignUp = async ({ email, password }) => {
-    try {
-      await axios.post(`${REACT_APP_API_URL}/users`, { email, password });
+    const data = await axiosHelper.postToApi('/users', { email, password });
 
+    if (data.code) ToastsStore.error(data.message);
+    else {
       ToastsStore.success('Account created! Please sign in.');
 
       history.push('/');
-    } catch (error) {
-      ToastsStore.error(error.response.data.message);
     }
   };
 
