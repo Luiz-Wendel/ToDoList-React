@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import localStorageHelper from '../../helpers/localStorageHelper';
 import jwt from '../../helpers/jwt';
 import NewTaskForm from '../../components/NewTaskForm';
+import TasksTable from '../../components/TasksTable';
 
 const Tasks = () => {
   const [token, setToken] = React.useState('');
@@ -38,6 +39,8 @@ const Tasks = () => {
       <h1>Tasks</h1>
 
       <NewTaskForm token={token} />
+
+      <TasksTable />
     </main>
   );
 };
