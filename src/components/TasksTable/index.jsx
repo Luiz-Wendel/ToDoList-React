@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import TaskRow from './TaskRow';
 import TableHead from './TableHead';
 import axiosHelper from '../../helpers/axiosHelper';
-import localStorageHelper from '../../helpers/localStorageHelper';
 
 const TasksTable = ({ token, tasks, setTasks }) => {
   const history = useHistory();
@@ -18,7 +17,7 @@ const TasksTable = ({ token, tasks, setTasks }) => {
       ToastsStore.error(data.message);
 
       if (data.code.endsWith('token')) {
-        localStorageHelper.set('token', '');
+        localStorage.removeItem('token');
         history.push('/');
       }
     }

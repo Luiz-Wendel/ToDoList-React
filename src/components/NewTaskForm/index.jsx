@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
 import axiosHelper from '../../helpers/axiosHelper';
-import localStorageHelper from '../../helpers/localStorageHelper';
 
 const NewTaskForm = ({ setTasks }) => {
   const history = useHistory();
@@ -18,7 +17,7 @@ const NewTaskForm = ({ setTasks }) => {
       ToastsStore.error(data.message);
 
       if (data.code.endsWith('token')) {
-        localStorageHelper.set('token', '');
+        localStorage.removeItem('token');
         history.push('/');
       }
     } else {
