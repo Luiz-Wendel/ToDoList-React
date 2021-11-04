@@ -24,7 +24,6 @@ const UserForm = ({ handleSubmit }) => {
   return (
     <form>
       <section>
-        <label htmlFor="email">Email</label>
         <input
           type="email"
           id="email"
@@ -34,7 +33,6 @@ const UserForm = ({ handleSubmit }) => {
           onChange={({ target }) => setEmail(target.value)}
         />
 
-        <label htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
