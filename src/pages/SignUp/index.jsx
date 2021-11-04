@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ToastsStore } from 'react-toasts';
 import { useHistory } from 'react-router-dom';
 import UserForm from '../../components/UserForm';
+import Header from '../../components/Header';
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -23,6 +24,8 @@ const SignUp = () => {
 
   return (
     <main>
+      <Header />
+
       <h1>SignUp</h1>
 
       <UserForm handleSubmit={handleSignUp} />

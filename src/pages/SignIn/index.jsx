@@ -3,6 +3,7 @@ import { ToastsStore } from 'react-toasts';
 import axios from 'axios';
 import UserForm from '../../components/UserForm';
 import localStorageHelper from '../../helpers/localStorageHelper';
+import Header from '../../components/Header';
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -22,6 +23,8 @@ const handleSignIn = async ({ email, password }) => {
 
 const SignIn = () => (
   <main>
+    <Header />
+
     <h1 data-testid="signin-title">SignIn</h1>
 
     <UserForm handleSubmit={handleSignIn} />
