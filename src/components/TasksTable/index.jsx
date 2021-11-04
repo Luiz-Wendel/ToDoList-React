@@ -7,7 +7,7 @@ import TableHead from './TableHead';
 
 const { REACT_APP_API_URL } = process.env;
 
-const TasksTable = ({ token }) => {
+const TasksTable = ({ token, tasks, setTasks }) => {
   const getTasks = async () => {
     const axiosConfig = {
       headers: {
@@ -18,7 +18,7 @@ const TasksTable = ({ token }) => {
     try {
       const { data } = await axios.get(`${REACT_APP_API_URL}/tasks`, axiosConfig);
 
-      console.log(data.tasks);
+      setTasks(data.tasks);
 
       ToastsStore.success('Created!');
     } catch (error) {
@@ -33,13 +33,15 @@ const TasksTable = ({ token }) => {
   return (
     <table>
       <TableHead />
-      <TableBody />
+      <TableBody tasks={tasks} />
     </table>
   );
 };
 
 TasksTable.propTypes = {
   token: PropTypes.string,
+  tasks: PropTypes.arrayOf(PropTypes.object),
+  setTasks: PropTypes.func,
 }.isRequired;
 
 export default TasksTable;

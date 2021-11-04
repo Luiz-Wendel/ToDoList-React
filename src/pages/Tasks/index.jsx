@@ -9,6 +9,7 @@ import TasksTable from '../../components/TasksTable';
 
 const Tasks = () => {
   const [token, setToken] = React.useState('');
+  const [tasks, setTasks] = React.useState([]);
 
   const history = useHistory();
 
@@ -40,7 +41,7 @@ const Tasks = () => {
 
       <NewTaskForm token={token} />
 
-      <TasksTable token={token} />
+      <TasksTable token={token} tasks={tasks} setTasks={setTasks} />
     </main>
   );
 };
