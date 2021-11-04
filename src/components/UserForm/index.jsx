@@ -1,11 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 const UserForm = ({ handleSubmit }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const history = useHistory();
+
+  const signInLink = (
+    <p>
+      {'Already have an account? '}
+      <Link to="/">Sign In</Link>
+    </p>
+  );
+
+  const signUpLink = (
+    <p>
+      {'Don\'t have an account? '}
+      <Link to="/signup">Sign Up</Link>
+    </p>
+  );
 
   return (
     <form>
@@ -36,6 +50,13 @@ const UserForm = ({ handleSubmit }) => {
             history.location.pathname === '/' ? 'Sign In' : 'Sign Up'
           }
         </button>
+      </section>
+      <section>
+        {
+          history.location.pathname === '/'
+            ? signUpLink
+            : signInLink
+        }
       </section>
     </form>
   );
