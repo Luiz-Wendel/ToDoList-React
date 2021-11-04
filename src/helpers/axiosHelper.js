@@ -33,4 +33,14 @@ const postToApi = async (endpoint, payload) => {
   }
 };
 
-export default { getFromApi, postToApi };
+const deleteFromApi = async (endpoint) => {
+  try {
+    const { data } = await axios.delete(`${REACT_APP_API_URL}${endpoint}`, axiosConfig());
+
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export default { getFromApi, postToApi, deleteFromApi };
