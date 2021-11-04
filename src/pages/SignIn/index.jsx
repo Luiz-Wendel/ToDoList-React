@@ -4,6 +4,10 @@ const SignIn = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  const handleSignIn = () => {
+    console.log(email, password);
+  };
+
   return (
     <main>
       <h1 data-testid="signin-title">SignIn</h1>
@@ -29,6 +33,11 @@ const SignIn = () => {
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
+        </section>
+        <section>
+          <button type="button" onClick={handleSignIn}>
+            Log In
+          </button>
         </section>
       </form>
     </main>
