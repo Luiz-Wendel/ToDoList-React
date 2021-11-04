@@ -1,26 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
-import localStorageHelper from '../../helpers/localStorageHelper';
-
-const { REACT_APP_API_URL } = process.env;
-
-const SignInForm = ({ ToastsStore }) => {
+const UserForm = ({ handleSubmit }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-
-  const handleSignIn = async () => {
-    try {
-      const response = await axios.post(`${REACT_APP_API_URL}/users/signin`, { email, password });
-
-      localStorageHelper.set('token', response.data.token);
-
-      // TODO: redirect to tasks page
-    } catch (error) {
-      ToastsStore.error(error.response.data.message);
-    }
-  };
+  const history = useHistory();
 
   return (
     <form>
@@ -46,18 +31,18 @@ const SignInForm = ({ ToastsStore }) => {
         />
       </section>
       <section>
-        <button type="button" onClick={handleSignIn}>
-          Sign In
+        <button type="button" onClick={() => handleSubmit({ email, password })}>
+          {
+            history.location.pathname === '/' ? 'Sign In' : 'Sign Up'
+          }
         </button>
       </section>
     </form>
   );
 };
 
-SignInForm.propTypes = {
-  ToastsStore: PropTypes.shape({
-    error: PropTypes.func,
-  }),
+UserForm.propTypes = {
+  handleSubmit: PropTypes.func,
 }.isRequired;
 
-export default SignInForm;
+export default UserForm;
