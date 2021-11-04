@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { ToastsStore } from 'react-toasts';
 import Header from '../../components/Header';
 import localStorageHelper from '../../helpers/localStorageHelper';
+import jwt from '../../helpers/jwt';
 
 const Tasks = () => {
   const [token, setToken] = React.useState('');
@@ -18,6 +19,14 @@ const Tasks = () => {
       ToastsStore.error('Please sign in!');
 
       history.push('/');
+    } else if (token.length > 0) {
+      try {
+        jwt.validate(token);
+      } catch (error) {
+        ToastsStore.error('Invalid token! Please sign in again.');
+
+        history.push('/');
+      }
     }
   }, [token]);
 
