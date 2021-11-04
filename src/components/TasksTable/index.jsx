@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { ToastsStore } from 'react-toasts';
 import PropTypes from 'prop-types';
-import TableBody from './TableBody';
+import TaskRow from './TaskRow';
 import TableHead from './TableHead';
 
 const { REACT_APP_API_URL } = process.env;
@@ -32,8 +32,12 @@ const TasksTable = ({ token, tasks, setTasks }) => {
 
   return (
     <table>
-      <TableHead />
-      <TableBody tasks={tasks} />
+      <thead>
+        <TableHead />
+      </thead>
+      <tbody>
+        <TaskRow tasks={tasks} />
+      </tbody>
     </table>
   );
 };
