@@ -1,6 +1,6 @@
 function App() {
   return (
-    <h1>ToDo List App</h1>
+    <h1 data-testid='app-title'>ToDo List App</h1>
   );
 }
 
