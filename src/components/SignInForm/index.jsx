@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import localStorageHelper from '../../helpers/localStorageHelper';
+
 const { REACT_APP_API_URL } = process.env;
 
 const SignInForm = ({ ToastsStore }) => {
@@ -10,7 +12,11 @@ const SignInForm = ({ ToastsStore }) => {
 
   const handleSignIn = async () => {
     try {
-      await axios.post(`${REACT_APP_API_URL}/users/signin`, { email, password });
+      const response = await axios.post(`${REACT_APP_API_URL}/users/signin`, { email, password });
+
+      localStorageHelper.set('token', response.data.token);
+
+      // TODO: redirect to tasks page
     } catch (error) {
       ToastsStore.error(error.response.data.message);
     }
@@ -41,7 +47,7 @@ const SignInForm = ({ ToastsStore }) => {
       </section>
       <section>
         <button type="button" onClick={handleSignIn}>
-          Log In
+          Sign In
         </button>
       </section>
     </form>
