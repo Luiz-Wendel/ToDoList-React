@@ -37,7 +37,7 @@ const Tasks = () => {
 
       <h1>Tasks</h1>
 
-      <NewTaskForm />
+      <NewTaskForm token={token} />
     </main>
   );
 };
