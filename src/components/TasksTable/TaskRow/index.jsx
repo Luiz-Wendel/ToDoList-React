@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import dateHelper from '../../../helpers/dateHelper';
 
 const TaskRow = ({ number, task }) => (
   <tr>
     <td>{number}</td>
     <td>{task.description}</td>
     <td>{task.status}</td>
-    <td>{task.createdAt}</td>
+    <td>{dateHelper.getEuropeanDate(task.createdAt)}</td>
   </tr>
 );
 
