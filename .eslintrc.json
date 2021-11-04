@@ -17,7 +17,9 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "jsx-a11y",
+    "import"
   ],
   "rules": {
     "jsx-a11y/label-has-associated-control": ["error", {
