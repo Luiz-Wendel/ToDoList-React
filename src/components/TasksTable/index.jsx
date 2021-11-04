@@ -19,16 +19,14 @@ const TasksTable = ({ token, tasks, setTasks }) => {
       const { data } = await axios.get(`${REACT_APP_API_URL}/tasks`, axiosConfig);
 
       setTasks(data.tasks);
-
-      ToastsStore.success('Created!');
     } catch (error) {
       ToastsStore.error(error.response.data.message);
     }
   };
 
   React.useEffect(() => {
-    getTasks();
-  }, []);
+    if (token) getTasks();
+  }, [token]);
 
   return (
     <table>
@@ -36,7 +34,11 @@ const TasksTable = ({ token, tasks, setTasks }) => {
         <TableHead />
       </thead>
       <tbody>
-        <TaskRow tasks={tasks} />
+        {
+          tasks && tasks.map((task, index) => (
+            <TaskRow key={task.createdAt} number={index + 1} task={task} />
+          ))
+        }
       </tbody>
     </table>
   );
