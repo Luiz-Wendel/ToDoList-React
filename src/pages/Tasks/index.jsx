@@ -5,9 +5,11 @@ import Header from '../../components/Header';
 import localStorageHelper from '../../helpers/localStorageHelper';
 import jwt from '../../helpers/jwt';
 import NewTaskForm from '../../components/NewTaskForm';
+import TasksTable from '../../components/TasksTable';
 
 const Tasks = () => {
   const [token, setToken] = React.useState('');
+  const [tasks, setTasks] = React.useState([]);
 
   const history = useHistory();
 
@@ -37,7 +39,9 @@ const Tasks = () => {
 
       <h1>Tasks</h1>
 
-      <NewTaskForm token={token} />
+      <NewTaskForm token={token} setTasks={setTasks} />
+
+      <TasksTable token={token} tasks={tasks} setTasks={setTasks} />
     </main>
   );
 };

@@ -1,0 +1,53 @@
+import React from 'react';
+import axios from 'axios';
+import { ToastsStore } from 'react-toasts';
+import PropTypes from 'prop-types';
+import TaskRow from './TaskRow';
+import TableHead from './TableHead';
+
+const { REACT_APP_API_URL } = process.env;
+
+const TasksTable = ({ token, tasks, setTasks }) => {
+  const getTasks = async () => {
+    const axiosConfig = {
+      headers: {
+        Authorization: token,
+      },
+    };
+
+    try {
+      const { data } = await axios.get(`${REACT_APP_API_URL}/tasks`, axiosConfig);
+
+      setTasks(data.tasks);
+    } catch (error) {
+      ToastsStore.error(error.response.data.message);
+    }
+  };
+
+  React.useEffect(() => {
+    if (token) getTasks();
+  }, [token]);
+
+  return (
+    <table>
+      <thead>
+        <TableHead />
+      </thead>
+      <tbody>
+        {
+          tasks && tasks.map((task, index) => (
+            <TaskRow key={task.createdAt} number={index + 1} task={task} />
+          ))
+        }
+      </tbody>
+    </table>
+  );
+};
+
+TasksTable.propTypes = {
+  token: PropTypes.string,
+  tasks: PropTypes.arrayOf(PropTypes.object),
+  setTasks: PropTypes.func,
+}.isRequired;
+
+export default TasksTable;
