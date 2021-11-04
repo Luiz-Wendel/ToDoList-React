@@ -1,16 +1,19 @@
 import axios from 'axios';
+import localStorageHelper from './localStorageHelper';
 
 const { REACT_APP_API_URL } = process.env;
 
-const axiosConfig = (token) => ({
+const token = localStorageHelper.get('token');
+
+const axiosConfig = {
   headers: {
     Authorization: token,
   },
-});
+};
 
-const getFromApi = async (endpoint, token) => {
+const getFromApi = async (endpoint) => {
   try {
-    const { data } = await axios.get(`${REACT_APP_API_URL}${endpoint}`, axiosConfig(token));
+    const { data } = await axios.get(`${REACT_APP_API_URL}${endpoint}`, axiosConfig);
 
     return data;
   } catch (error) {
@@ -18,9 +21,9 @@ const getFromApi = async (endpoint, token) => {
   }
 };
 
-const postToApi = async (endpoint, payload, token) => {
+const postToApi = async (endpoint, payload) => {
   try {
-    const { data } = await axios.post(`${REACT_APP_API_URL}${endpoint}`, payload, axiosConfig(token));
+    const { data } = await axios.post(`${REACT_APP_API_URL}${endpoint}`, payload, axiosConfig);
 
     return data;
   } catch (error) {
