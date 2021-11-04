@@ -4,6 +4,7 @@ import { ToastsStore } from 'react-toasts';
 import Header from '../../components/Header';
 import localStorageHelper from '../../helpers/localStorageHelper';
 import jwt from '../../helpers/jwt';
+import NewTaskForm from '../../components/NewTaskForm';
 
 const Tasks = () => {
   const [token, setToken] = React.useState('');
@@ -35,6 +36,8 @@ const Tasks = () => {
       <Header />
 
       <h1>Tasks</h1>
+
+      <NewTaskForm />
     </main>
   );
 };
