@@ -7,7 +7,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const { REACT_APP_API_URL } = process.env;
 
-const NewTaskForm = ({ token }) => {
+const NewTaskForm = ({ token, setTasks }) => {
   const [description, setDescription] = React.useState('');
 
   const handleNewTask = async () => {
@@ -18,7 +18,9 @@ const NewTaskForm = ({ token }) => {
     };
 
     try {
-      await axios.post(`${REACT_APP_API_URL}/tasks`, { description }, axiosConfig);
+      const { data } = await axios.post(`${REACT_APP_API_URL}/tasks`, { description }, axiosConfig);
+
+      setTasks((previousTasks) => [...previousTasks, data]);
 
       ToastsStore.success('Created!');
     } catch (error) {
@@ -46,6 +48,7 @@ const NewTaskForm = ({ token }) => {
 
 NewTaskForm.propTypes = {
   token: PropTypes.string,
+  setTasks: PropTypes.func,
 }.isRequired;
 
 export default NewTaskForm;
