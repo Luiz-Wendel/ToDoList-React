@@ -1,12 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const TaskRow = () => (
+const TaskRow = ({ number, task }) => (
   <tr>
-    <td>1</td>
-    <td>Buy</td>
-    <td>Pending</td>
-    <td>10/10/2020</td>
+    <td>{number}</td>
+    <td>{task.description}</td>
+    <td>{task.status}</td>
+    <td>{task.createdAt}</td>
   </tr>
 );
+
+TaskRow.propTypes = {
+  number: PropTypes.number,
+  task: PropTypes.shape({
+    _id: PropTypes.string,
+    description: PropTypes.string,
+    status: PropTypes.string,
+    createdAt: PropTypes.number,
+  }),
+}.isRequired;
 
 export default TaskRow;
