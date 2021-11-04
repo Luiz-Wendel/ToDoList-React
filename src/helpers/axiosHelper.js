@@ -18,4 +18,14 @@ const getFromApi = async (endpoint, token) => {
   }
 };
 
-export default { getFromApi };
+const postToApi = async (endpoint, payload, token) => {
+  try {
+    const { data } = await axios.post(`${REACT_APP_API_URL}${endpoint}`, payload, axiosConfig(token));
+
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export default { getFromApi, postToApi };
