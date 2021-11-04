@@ -40,7 +40,7 @@ const Tasks = () => {
 
       <NewTaskForm token={token} />
 
-      <TasksTable />
+      <TasksTable token={token} />
     </main>
   );
 };
