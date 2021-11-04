@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import dateHelper from '../../../helpers/dateHelper';
 
 const TaskRow = ({ number, task }) => (
@@ -8,6 +10,11 @@ const TaskRow = ({ number, task }) => (
     <td>{task.description}</td>
     <td>{task.status}</td>
     <td>{dateHelper.getEuropeanDate(task.createdAt)}</td>
+    <td>
+      <button type="button" title="Remove task">
+        <FontAwesomeIcon icon={faTrashAlt} />
+      </button>
+    </td>
   </tr>
 );
 
