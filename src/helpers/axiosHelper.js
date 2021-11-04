@@ -10,11 +10,11 @@ const axiosConfig = (token) => ({
 
 const getFromApi = async (endpoint, token) => {
   try {
-    const response = await axios.get(`${REACT_APP_API_URL}${endpoint}`, axiosConfig(token));
+    const { data } = await axios.get(`${REACT_APP_API_URL}${endpoint}`, axiosConfig(token));
 
-    return response;
+    return data;
   } catch (error) {
-    return error;
+    return error.response.data;
   }
 };
 

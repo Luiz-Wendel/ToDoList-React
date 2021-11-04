@@ -7,10 +7,10 @@ import axiosHelper from '../../helpers/axiosHelper';
 
 const TasksTable = ({ token, tasks, setTasks }) => {
   const getTasks = async () => {
-    const response = await axiosHelper.getFromApi('/tasks', token);
+    const data = await axiosHelper.getFromApi('/tasks', token);
 
-    if (response.data) setTasks(response.data.tasks);
-    else ToastsStore.error(response.response.data.message);
+    if (data.tasks) setTasks(data.tasks);
+    else ToastsStore.error(data.message);
   };
 
   React.useEffect(() => {
