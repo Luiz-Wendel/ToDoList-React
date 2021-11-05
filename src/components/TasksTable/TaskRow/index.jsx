@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ToastsStore } from 'react-toasts';
 import { useHistory } from 'react-router-dom';
 import dateHelper from '../../../helpers/dateHelper';
@@ -13,6 +13,7 @@ const TaskRow = ({ number, task, setTasks }) => {
   const {
     _id: id, description, status, createdAt,
   } = task;
+  const [taskDescription, setTaskDescription] = React.useState(description);
 
   const handleRemoveTask = async () => {
     const data = await axiosHelper.deleteFromApi(`/tasks/${id}`);
@@ -55,10 +56,45 @@ const TaskRow = ({ number, task, setTasks }) => {
     }
   };
 
+  const handleUpdateTask = async () => {
+    const data = await axiosHelper.putFromApi(
+      `/tasks/${id}`,
+      { description: taskDescription, status },
+    );
+
+    if (data && data.code) {
+      ToastsStore.error(data.message);
+
+      if (data.code.endsWith('token')) {
+        localStorage.removeItem('token');
+        history.push('/');
+      }
+    } else {
+      ToastsStore.success('Task updated!');
+
+      setTasks((previousTasks) => previousTasks.reduce(
+        (updatedTaskList, { _id: taskId, ...taskInfo }) => (
+          taskId !== id
+            ? [...updatedTaskList, { _id: taskId, ...taskInfo }]
+            : [...updatedTaskList, data]
+        ),
+        [],
+      ));
+    }
+  };
+
   return (
     <tr>
       <td>{number}</td>
-      <td>{description}</td>
+      <td>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          value={taskDescription}
+          onChange={({ target }) => setTaskDescription(target.value)}
+        />
+      </td>
       <td>
         <select
           name="status"
@@ -77,6 +113,9 @@ const TaskRow = ({ number, task, setTasks }) => {
       <td>
         <button type="button" title="Remove task" onClick={handleRemoveTask}>
           <FontAwesomeIcon icon={faTrashAlt} />
+        </button>
+        <button type="button" title="Update task" onClick={handleUpdateTask}>
+          <FontAwesomeIcon icon={faEdit} />
         </button>
       </td>
     </tr>

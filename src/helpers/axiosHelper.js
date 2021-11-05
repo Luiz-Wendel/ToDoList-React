@@ -53,9 +53,20 @@ const patchFromApi = async (endpoint, payload) => {
   }
 };
 
+const putFromApi = async (endpoint, payload) => {
+  try {
+    const { data } = await axios.put(`${REACT_APP_API_URL}${endpoint}`, payload, axiosConfig());
+
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 export default {
   getFromApi,
   postToApi,
   deleteFromApi,
   patchFromApi,
+  putFromApi,
 };
