@@ -7,6 +7,7 @@ import jwt from '../../helpers/jwt';
 import NewTaskForm from '../../components/NewTaskForm';
 import TasksTable from '../../components/TasksTable';
 import Footer from '../../components/Footer';
+import style from './style.module.css';
 
 const Tasks = () => {
   const [token, setToken] = React.useState('');
@@ -35,17 +36,21 @@ const Tasks = () => {
   }, [token]);
 
   return (
-    <main>
+    <>
       <Header />
 
-      <h1>Tasks</h1>
+      <main className={style.container}>
 
-      <NewTaskForm setTasks={setTasks} />
+        <h1 className={style.title}>Tasks</h1>
 
-      <TasksTable token={token} tasks={tasks} setTasks={setTasks} />
+        <NewTaskForm setTasks={setTasks} />
+
+        <TasksTable token={token} tasks={tasks} setTasks={setTasks} />
+
+      </main>
 
       <Footer />
-    </main>
+    </>
   );
 };
 
