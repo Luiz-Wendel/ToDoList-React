@@ -1,0 +1,27 @@
+.description, .status {
+  background-color: var(--tertiary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 0.75em;
+  font-size: 0.8em;
+  font-weight: bold;
+  outline: none;
+  padding: 0.5em;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.actions > button {
+  background-color: var(--quaternary-color);
+  border: none;
+}
+
+.removeBtn {
+  color: darkred;
+}
+
+.updateBtn {
+  color: darkblue;
+}

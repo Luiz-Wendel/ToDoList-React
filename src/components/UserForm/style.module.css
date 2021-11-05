@@ -1,0 +1,50 @@
+.form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+}
+
+.inputContainer > input {
+  border: none;
+  border-radius: 0.5em;
+  height: 3em;
+  outline: none;
+  padding: 0 1em;
+}
+
+.buttonContainer {
+  width: 100%;
+}
+
+.buttonContainer > button {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0.3em;
+  color: var(--primary-text-color);
+  font-size: 1.5em;
+  font-weight: 600;
+  padding: 0.3em 0;
+  width: 100%;
+}
+
+.buttonContainer > button:hover {
+  background-color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.extraInfo a {
+  color: var(--secondary-color);
+}
+
+.extraInfo a:hover {
+  color: var(--primary-color);
+}

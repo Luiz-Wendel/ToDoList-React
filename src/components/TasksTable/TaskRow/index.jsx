@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import dateHelper from '../../../helpers/dateHelper';
 import axiosHelper from '../../../helpers/axiosHelper';
 import statusList from '../../../schemas/statusSchema';
+import style from './style.module.css';
 
 const TaskRow = ({ number, task, setTasks }) => {
   const history = useHistory();
@@ -85,7 +86,7 @@ const TaskRow = ({ number, task, setTasks }) => {
 
   return (
     <tr>
-      <td>{number}</td>
+      <th>{number}</th>
       <td>
         <input
           type="text"
@@ -93,6 +94,7 @@ const TaskRow = ({ number, task, setTasks }) => {
           name="description"
           value={taskDescription}
           onChange={({ target }) => setTaskDescription(target.value)}
+          className={style.description}
         />
       </td>
       <td>
@@ -101,6 +103,7 @@ const TaskRow = ({ number, task, setTasks }) => {
           id="status"
           value={status}
           onChange={({ target }) => handleStatusChange(target.value)}
+          className={style.status}
         >
           {
             statusList.map((availableStatus) => (
@@ -110,12 +113,12 @@ const TaskRow = ({ number, task, setTasks }) => {
         </select>
       </td>
       <td>{dateHelper.getEuropeanDate(createdAt)}</td>
-      <td>
-        <button type="button" title="Remove task" onClick={handleRemoveTask}>
-          <FontAwesomeIcon icon={faTrashAlt} />
+      <td className={style.actions}>
+        <button type="button" title="Remove task" onClick={handleRemoveTask} className={style.removeBtn}>
+          <FontAwesomeIcon icon={faTrashAlt} size="2x" />
         </button>
-        <button type="button" title="Update task" onClick={handleUpdateTask}>
-          <FontAwesomeIcon icon={faEdit} />
+        <button type="button" title="Update task" onClick={handleUpdateTask} className={style.updateBtn}>
+          <FontAwesomeIcon icon={faEdit} size="2x" />
         </button>
       </td>
     </tr>

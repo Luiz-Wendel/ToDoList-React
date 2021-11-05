@@ -6,6 +6,7 @@ import localStorageHelper from '../../helpers/localStorageHelper';
 import Header from '../../components/Header';
 import axiosHelper from '../../helpers/axiosHelper';
 import Footer from '../../components/Footer';
+import style from './style.module.css';
 
 const SignIn = () => {
   const history = useHistory();
@@ -23,15 +24,21 @@ const SignIn = () => {
   };
 
   return (
-    <main>
+    <>
       <Header />
 
-      <h1 data-testid="signin-title">SignIn</h1>
+      <main className={style.container}>
 
-      <UserForm handleSubmit={handleSignIn} />
+        <section className={style.formContainer}>
+          <h1 className={style.title} data-testid="signin-title">SignIn</h1>
+
+          <UserForm handleSubmit={handleSignIn} />
+        </section>
+
+      </main>
 
       <Footer />
-    </main>
+    </>
   );
 };
 

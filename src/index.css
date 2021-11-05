@@ -1,10 +1,26 @@
+/*
+  Color palette
+  Source: https://coolors.co/f8f9fa-e9ecef-dee2e6-ced4da-adb5bd-6c757d-495057-343a40-212529
+*/
+
+:root {
+  --primary-color: #212529;
+  --secondary-color: #495057;
+  --tertiary-color: #6C757D;
+  --quaternary-color: #CED4DA;
+  --primary-text-color: #F8F9FA;
+  --secondary-text-color: #212529;
+}
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
+  background-color: var(--secondary-color);
+  color: var(--primary-text-color);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

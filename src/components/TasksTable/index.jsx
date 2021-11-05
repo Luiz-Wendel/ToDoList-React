@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import TaskRow from './TaskRow';
 import TableHead from './TableHead';
 import axiosHelper from '../../helpers/axiosHelper';
+import style from './style.module.css';
 
 const TasksTable = ({ token, tasks, setTasks }) => {
   const history = useHistory();
@@ -28,7 +29,7 @@ const TasksTable = ({ token, tasks, setTasks }) => {
   }, [token]);
 
   return (
-    <table>
+    <table className={style.table}>
       <thead>
         <TableHead />
       </thead>

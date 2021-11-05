@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
 import axiosHelper from '../../helpers/axiosHelper';
+import style from './style.module.css';
 
 const NewTaskForm = ({ setTasks }) => {
   const history = useHistory();
@@ -28,12 +29,12 @@ const NewTaskForm = ({ setTasks }) => {
   };
 
   return (
-    <form>
+    <form className={style.form}>
       <input
         type="text"
         id="description"
         name="description"
-        placeholder="task..."
+        placeholder="new task"
         value={description}
         onChange={({ target }) => setDescription(target.value)}
       />
