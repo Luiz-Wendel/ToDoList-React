@@ -6,6 +6,7 @@ import { ToastsStore } from 'react-toasts';
 import { useHistory } from 'react-router-dom';
 import dateHelper from '../../../helpers/dateHelper';
 import axiosHelper from '../../../helpers/axiosHelper';
+import statusList from '../../../schemas/statusSchema';
 
 const TaskRow = ({ number, task, setTasks }) => {
   const history = useHistory();
@@ -30,11 +31,21 @@ const TaskRow = ({ number, task, setTasks }) => {
     }
   };
 
+  const handleStatusChange = () => {};
+
   return (
     <tr>
       <td>{number}</td>
       <td>{description}</td>
-      <td>{status}</td>
+      <td>
+        <select name="status" id="status" value={status} onChange={handleStatusChange}>
+          {
+            statusList.map((availableStatus) => (
+              <option key={availableStatus} value={availableStatus}>{availableStatus}</option>
+            ))
+          }
+        </select>
+      </td>
       <td>{dateHelper.getEuropeanDate(createdAt)}</td>
       <td>
         <button type="button" title="Remove task" onClick={handleRemoveTask}>
