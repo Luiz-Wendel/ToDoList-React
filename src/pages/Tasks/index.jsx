@@ -6,6 +6,7 @@ import localStorageHelper from '../../helpers/localStorageHelper';
 import jwt from '../../helpers/jwt';
 import NewTaskForm from '../../components/NewTaskForm';
 import TasksTable from '../../components/TasksTable';
+import Footer from '../../components/Footer';
 
 const Tasks = () => {
   const [token, setToken] = React.useState('');
@@ -42,6 +43,8 @@ const Tasks = () => {
       <NewTaskForm setTasks={setTasks} />
 
       <TasksTable token={token} tasks={tasks} setTasks={setTasks} />
+
+      <Footer />
     </main>
   );
 };

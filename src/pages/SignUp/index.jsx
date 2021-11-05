@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import UserForm from '../../components/UserForm';
 import Header from '../../components/Header';
 import axiosHelper from '../../helpers/axiosHelper';
+import Footer from '../../components/Footer';
 
 const SignUp = () => {
   const history = useHistory();
@@ -26,6 +27,8 @@ const SignUp = () => {
       <h1>SignUp</h1>
 
       <UserForm handleSubmit={handleSignUp} />
+
+      <Footer />
     </main>
   );
 };
