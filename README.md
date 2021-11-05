@@ -1,13 +1,43 @@
-# Getting Started with Create React App
+# Wellcome to my To Do List React project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+This is the frontend app of the To Do List made for the Career Blitz by Trybe.
+
+With this app you will be able to:
+* Create a user;
+* Sign in with created user;
+* After signed in:
+  * Create a task;
+  * View all tasks;
+  * Update a task;
+  * Update a task status;
+  * Delete a task.
+
+# Skills
+
+* React;
+* RTL;
+* React router dom.
+
+# How to run the app
+
+## Requirements
+
+* npm: 7.5.4
+* Environment variables setup (`.env` file)
+
+## Steps
+
+* After downloading the app, enter the project folder.
+* Run the command `npm ci` to install project dependencies.
+* Run the command `npm start` to start the app.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
-
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
@@ -39,32 +69,19 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Available routes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Sign Up Page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  `/signup`
+  Has a form to add a user
 
-### Code Splitting
+### Sign In Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  `/`
+  Has a form to log in with the created user
 
-### Analyzing the Bundle Size
+### Tasks Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  `/tasks`
+  After sign in has access to tasks CRUD
