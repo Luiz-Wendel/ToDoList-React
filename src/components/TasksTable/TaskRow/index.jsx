@@ -56,7 +56,32 @@ const TaskRow = ({ number, task, setTasks }) => {
     }
   };
 
-  const handleUpdateTask = async () => {};
+  const handleUpdateTask = async () => {
+    const data = await axiosHelper.putFromApi(
+      `/tasks/${id}`,
+      { description: taskDescription, status },
+    );
+
+    if (data && data.code) {
+      ToastsStore.error(data.message);
+
+      if (data.code.endsWith('token')) {
+        localStorage.removeItem('token');
+        history.push('/');
+      }
+    } else {
+      ToastsStore.success('Task updated!');
+
+      setTasks((previousTasks) => previousTasks.reduce(
+        (updatedTaskList, { _id: taskId, ...taskInfo }) => (
+          taskId !== id
+            ? [...updatedTaskList, { _id: taskId, ...taskInfo }]
+            : [...updatedTaskList, data]
+        ),
+        [],
+      ));
+    }
+  };
 
   return (
     <tr>
