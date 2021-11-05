@@ -23,6 +23,7 @@ const NewTaskForm = ({ setTasks }) => {
       }
     } else {
       setTasks((previousTasks) => [...previousTasks, data]);
+      setDescription('');
 
       ToastsStore.success('Created!');
     }
