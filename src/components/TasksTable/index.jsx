@@ -1,26 +1,25 @@
 import React from 'react';
-import axios from 'axios';
 import { ToastsStore } from 'react-toasts';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import TaskRow from './TaskRow';
 import TableHead from './TableHead';
-
-const { REACT_APP_API_URL } = process.env;
+import axiosHelper from '../../helpers/axiosHelper';
 
 const TasksTable = ({ token, tasks, setTasks }) => {
+  const history = useHistory();
+
   const getTasks = async () => {
-    const axiosConfig = {
-      headers: {
-        Authorization: token,
-      },
-    };
+    const data = await axiosHelper.getFromApi('/tasks');
 
-    try {
-      const { data } = await axios.get(`${REACT_APP_API_URL}/tasks`, axiosConfig);
+    if (data.tasks) setTasks(data.tasks);
+    else {
+      ToastsStore.error(data.message);
 
-      setTasks(data.tasks);
-    } catch (error) {
-      ToastsStore.error(error.response.data.message);
+      if (data.code.endsWith('token')) {
+        localStorage.removeItem('token');
+        history.push('/');
+      }
     }
   };
 
@@ -36,7 +35,7 @@ const TasksTable = ({ token, tasks, setTasks }) => {
       <tbody>
         {
           tasks && tasks.map((task, index) => (
-            <TaskRow key={task.createdAt} number={index + 1} task={task} />
+            <TaskRow key={task.createdAt} number={index + 1} task={task} setTasks={setTasks} />
           ))
         }
       </tbody>

@@ -1,30 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { ToastsStore } from 'react-toasts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useHistory } from 'react-router-dom';
+import axiosHelper from '../../helpers/axiosHelper';
 
-const { REACT_APP_API_URL } = process.env;
-
-const NewTaskForm = ({ token, setTasks }) => {
+const NewTaskForm = ({ setTasks }) => {
+  const history = useHistory();
   const [description, setDescription] = React.useState('');
 
   const handleNewTask = async () => {
-    const axiosConfig = {
-      headers: {
-        Authorization: token,
-      },
-    };
+    const data = await axiosHelper.postToApi('/tasks', { description });
 
-    try {
-      const { data } = await axios.post(`${REACT_APP_API_URL}/tasks`, { description }, axiosConfig);
+    if (data.code) {
+      ToastsStore.error(data.message);
 
+      if (data.code.endsWith('token')) {
+        localStorage.removeItem('token');
+        history.push('/');
+      }
+    } else {
       setTasks((previousTasks) => [...previousTasks, data]);
 
       ToastsStore.success('Created!');
-    } catch (error) {
-      ToastsStore.error(error.response.data.message);
     }
   };
 
@@ -47,7 +46,6 @@ const NewTaskForm = ({ token, setTasks }) => {
 };
 
 NewTaskForm.propTypes = {
-  token: PropTypes.string,
   setTasks: PropTypes.func,
 }.isRequired;
 

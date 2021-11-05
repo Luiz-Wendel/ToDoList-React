@@ -1,15 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { ToastsStore } from 'react-toasts';
+import { useHistory } from 'react-router-dom';
 import dateHelper from '../../../helpers/dateHelper';
+import axiosHelper from '../../../helpers/axiosHelper';
 
-const TaskRow = ({ number, task }) => (
-  <tr>
-    <td>{number}</td>
-    <td>{task.description}</td>
-    <td>{task.status}</td>
-    <td>{dateHelper.getEuropeanDate(task.createdAt)}</td>
-  </tr>
-);
+const TaskRow = ({ number, task, setTasks }) => {
+  const history = useHistory();
+  const {
+    _id: id, description, status, createdAt,
+  } = task;
+
+  const handleRemoveTask = async () => {
+    const data = await axiosHelper.deleteFromApi(`/tasks/${id}`);
+
+    if (data && data.code) {
+      ToastsStore.error(data.message);
+
+      if (data.code.endsWith('token')) {
+        localStorage.removeItem('token');
+        history.push('/');
+      }
+    } else {
+      ToastsStore.success('Task removed!');
+
+      setTasks((previousTasks) => previousTasks.filter(({ _id: taskId }) => taskId !== id));
+    }
+  };
+
+  return (
+    <tr>
+      <td>{number}</td>
+      <td>{description}</td>
+      <td>{status}</td>
+      <td>{dateHelper.getEuropeanDate(createdAt)}</td>
+      <td>
+        <button type="button" title="Remove task" onClick={handleRemoveTask}>
+          <FontAwesomeIcon icon={faTrashAlt} />
+        </button>
+      </td>
+    </tr>
+  );
+};
 
 TaskRow.propTypes = {
   number: PropTypes.number,
@@ -19,6 +53,7 @@ TaskRow.propTypes = {
     status: PropTypes.string,
     createdAt: PropTypes.number,
   }),
+  setTasks: PropTypes.func,
 }.isRequired;
 
 export default TaskRow;
