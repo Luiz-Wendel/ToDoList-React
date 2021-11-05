@@ -5,6 +5,7 @@ import UserForm from '../../components/UserForm';
 import localStorageHelper from '../../helpers/localStorageHelper';
 import Header from '../../components/Header';
 import axiosHelper from '../../helpers/axiosHelper';
+import Footer from '../../components/Footer';
 
 const SignIn = () => {
   const history = useHistory();
@@ -28,6 +29,8 @@ const SignIn = () => {
       <h1 data-testid="signin-title">SignIn</h1>
 
       <UserForm handleSubmit={handleSignIn} />
+
+      <Footer />
     </main>
   );
 };
