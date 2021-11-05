@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, Link } from 'react-router-dom';
+import style from './style.module.css';
 
 const UserForm = ({ handleSubmit }) => {
   const [email, setEmail] = React.useState('');
@@ -22,8 +23,8 @@ const UserForm = ({ handleSubmit }) => {
   );
 
   return (
-    <form>
-      <section>
+    <form className={style.form}>
+      <section className={style.inputContainer}>
         <input
           type="email"
           id="email"
@@ -42,14 +43,14 @@ const UserForm = ({ handleSubmit }) => {
           onChange={({ target }) => setPassword(target.value)}
         />
       </section>
-      <section>
+      <section className={style.buttonContainer}>
         <button type="button" onClick={() => handleSubmit({ email, password })}>
           {
             history.location.pathname === '/' ? 'Sign In' : 'Sign Up'
           }
         </button>
       </section>
-      <section>
+      <section className={style.extraInfo}>
         {
           history.location.pathname === '/'
             ? signUpLink

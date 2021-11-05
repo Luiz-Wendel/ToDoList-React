@@ -15,7 +15,9 @@
   display: flex;
   flex-direction: column;
   gap: 1.5em;
+  max-width: 600px;
   padding: 1em;
+  width: 80%;
 }
 
 .title {
