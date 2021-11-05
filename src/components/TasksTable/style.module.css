@@ -1,0 +1,19 @@
+.table {
+  background-color: var(--quaternary-color);
+  border-radius: 0.5em;
+  color: var(--secondary-text-color);
+  display: block;
+  font-size: 1.25em;
+  padding: 0 1em;
+  overflow: auto;
+}
+
+.table > thead {
+  background-color: var(--quaternary-color);
+  position: sticky;
+  top: 0;
+}
+
+.table > thead > tr > th {
+  padding: 0.5em 0;
+}
