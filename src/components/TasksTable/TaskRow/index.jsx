@@ -31,14 +31,41 @@ const TaskRow = ({ number, task, setTasks }) => {
     }
   };
 
-  const handleStatusChange = () => {};
+  const handleStatusChange = async (newStatus) => {
+    const data = await axiosHelper.patchFromApi(`/tasks/${id}/status`, { status: newStatus });
+
+    if (data && data.code) {
+      ToastsStore.error(data.message);
+
+      if (data.code.endsWith('token')) {
+        localStorage.removeItem('token');
+        history.push('/');
+      }
+    } else {
+      ToastsStore.success('Task status updated!');
+
+      setTasks((previousTasks) => previousTasks.reduce(
+        (updatedTaskList, { _id: taskId, ...taskInfo }) => (
+          taskId !== id
+            ? [...updatedTaskList, { _id: taskId, ...taskInfo }]
+            : [...updatedTaskList, data]
+        ),
+        [],
+      ));
+    }
+  };
 
   return (
     <tr>
       <td>{number}</td>
       <td>{description}</td>
       <td>
-        <select name="status" id="status" value={status} onChange={handleStatusChange}>
+        <select
+          name="status"
+          id="status"
+          value={status}
+          onChange={({ target }) => handleStatusChange(target.value)}
+        >
           {
             statusList.map((availableStatus) => (
               <option key={availableStatus} value={availableStatus}>{availableStatus}</option>
