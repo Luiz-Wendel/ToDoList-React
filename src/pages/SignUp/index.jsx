@@ -5,6 +5,7 @@ import UserForm from '../../components/UserForm';
 import Header from '../../components/Header';
 import axiosHelper from '../../helpers/axiosHelper';
 import Footer from '../../components/Footer';
+import style from './style.module.css';
 
 const SignUp = () => {
   const history = useHistory();
@@ -21,15 +22,21 @@ const SignUp = () => {
   };
 
   return (
-    <main>
+    <>
       <Header />
 
-      <h1>SignUp</h1>
+      <main className={style.container}>
 
-      <UserForm handleSubmit={handleSignUp} />
+        <section className={style.formContainer}>
+          <h1 className={style.title}>SignUp</h1>
+
+          <UserForm handleSubmit={handleSignUp} />
+        </section>
+
+      </main>
 
       <Footer />
-    </main>
+    </>
   );
 };
 
