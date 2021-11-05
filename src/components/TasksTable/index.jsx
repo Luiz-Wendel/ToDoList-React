@@ -35,7 +35,7 @@ const TasksTable = ({ token, tasks, setTasks }) => {
       <tbody>
         {
           tasks && tasks.map((task, index) => (
-            <TaskRow key={task.createdAt} number={index + 1} task={task} />
+            <TaskRow key={task.createdAt} number={index + 1} task={task} setTasks={setTasks} />
           ))
         }
       </tbody>
